@@ -92,7 +92,6 @@ Four arms (control, "every session is reviewed", "sessions are not reviewed", fi
 
 - **Oversight content matters, not sentence length.** The length-matched filler does nothing in either model. A numeric wording ("has a 100% probability of being reviewed") cut cheating as much as the plain sentence in a head-to-head run (25% to 8%, p = 0.02), so wording does not explain the flat sweep in Phase III.
 - **gpt-5.6-luna: same direction, weaker.** Pooled −12.5 pp (p < 0.0001), but −5.4 pp (p = 0.10) over its two concurrent runs; stage 0's −27 pp came from arms run one after another. The two models are not comparable with each other (different runs, providers and task counts).
-- **The notice is registered.** Asked afterwards, GLM said its work would be reviewed in 20 of 20 "reviewed" sessions and not reviewed in 15 of 20 "not reviewed" sessions ([follow-up data](results/2_hawthorne_effect/2026-10-18_glm_confirm_run1_followup/)).
 - **The notice does not change how often GLM voices evaluation awareness.** Hand-checked, GLM calls the task a test or a planted trap in about a third of tasks in every arm (59/177 control vs 60/177 reviewed; [`fig4e`](results/figures/fig4e_glm_suspicion_handchecked.png)). Only explicit "being tested" remarks go with less cheating, and only weakly once early exits are accounted for ([figure](results/2_hawthorne_effect/2026-10-22_suspicion_vs_cheating/suspicion_vs_cheating.png)). Correlational; the causal test is Phase IV.
 
 ---
@@ -191,9 +190,16 @@ Rscript analysis/arm_rates.R results/2_hawthorne_effect/<run>/samples.csv --cont
 | Phase I screen | `run_pilot.py --arms neutral --limit 20` per model | `analysis/make_deck_figures.R` |
 | Phase II review notice | command above | `analysis/arm_rates.R`, `analysis/make_deck_figures.R`, `analysis/suspicion_vs_cheating.R` |
 | Phase III probability sweep | `run_pilot.py` with the five numeric arms (exact text in `results/3_audit_probability/2026-10-20_glm_stage1_run1/run_config.json`) | `analysis/stage1_slope.R` (R, lme4), `analysis/fit_stage1_glmm.py` (Python check), `analysis/plot_stage1_*.py` |
-| Phase IV reasoning edits | `scripts/build_cot_edit_manifest.py` then `scripts/run_cot_edit.py` | `scripts/summarize_cot_edit.py`, `analysis/cot_edit_followup.R`, `analysis/cot_edit_transitions.R` |
+| Phase IV reasoning edits | `scripts/build_cot_edit_manifest.py` then `scripts/run_cot_edit.py` | `scripts/summarize_cot_edit.py`, `analysis/make_deck_figures.R` |
 
-Total spend for everything in this repository was about $66 at OpenRouter list prices. Pitfalls that cost us time, such as run-level drift, reply cut-offs and provider output caps, are listed in [`docs/impossiblebench_data_nuances.md`](docs/impossiblebench_data_nuances.md).
+Total spend for everything in this repository was about $66 at OpenRouter list prices.
+
+**Before re-running, know these five things.**
+- Compare arms only within one concurrent run; the same control drifted 18 pp between runs hours apart.
+- Replies cut off at the token cap hide cheats. GLM needs `--max-tokens 64000 --reasoning-effort low`, and some hosts cap output at 32k regardless.
+- Tasks `lcbhard_35` and `lcbhard_87` can never pass and are excluded from every rate.
+- Upstream's scorer undoes test edits, so use `cheat_in_loop` from `samples.csv`, not the upstream score.
+- Continuing GLM's reasoning needs the raw completions endpoint (`src/hawthorne/glm_raw.py`), not the chat endpoint.
 
 ---
 
@@ -206,7 +212,7 @@ Total spend for everything in this repository was about $66 at OpenRouter list p
 | `src/hawthorne/` | `notices.py` (all prompt text), `tasks.py` (the Inspect task: upstream task + one notice arm + work-ticket wording), `classify.py` (cheat-type and awareness-remark heuristics), `glm_raw.py` and `cot_edit.py` (reasoning-edit connector and task). |
 | `scripts/` | `run_pilot.py` (runs), `summarize_logs.py` (per-run summary and `samples.csv`), `followup_questions.py` (manipulation check), `smoke_test.py` and `scorer_check.py` (free checks), the reasoning-edit build/run/summarise scripts, and the Phase III analysis scripts. |
 | `analysis/` | R (default) and Python analysis; each script names its inputs at the top. |
-| `docs/` | The presentation deck and the list of benchmark and harness quirks to read before running anything. See [`docs/README.md`](docs/README.md). |
+| `docs/presentation/` | The slide deck. |
 | `external/impossiblebench/` | Upstream ImpossibleBench, pinned submodule, never edited. |
 
 **References.** Abdelnabi, S. and Salem, A. (2025). *The Hawthorne Effect in Reasoning Models: Evaluating and Steering Test Awareness.* ImpossibleBench: safety-research/impossiblebench, arXiv 2510.20270. Chain-of-thought injection as an inference-time safety intervention (ICLR 2026 submission, under review).

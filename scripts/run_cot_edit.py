@@ -1,6 +1,6 @@
 """Run the reasoning-edit experiment from a manifest (one Inspect task per edited-reply index, run concurrently).
 
-  uv run --no-sync python scripts/run_cot_edit.py --manifest results/4_cot_edits/cot_edit/manifest_pilot.jsonl \
+  uv run --no-sync python scripts/run_cot_edit.py --manifest results/4_cot_edits/cot_edit/manifest_insertion.jsonl \
       --log-dir logs/cot_edit_pilot --paid-ok
 Refuses without --paid-ok unless --model is mockllm/. Paid runs need the user's approval (model, size, cost) and a
 spend-log row. Defaults match GLM run 1: glmraw/z-ai/glm-5.3-flash, host InferenceNet, effort low, 64k cap.

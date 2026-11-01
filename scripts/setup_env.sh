@@ -8,7 +8,7 @@ cd "$(dirname "$0")/.."
 # (like .venv) with the macOS "hidden" flag some time after creation, and Python
 # skips hidden .pth files, which breaks the editable installs. So the real venv
 # lives OUTSIDE iCloud and .venv is a symlink to it.
-# See docs/impossiblebench_data_nuances.md, entry N1.
+# iCloud-synced folders hide dot-folders and break .pth files, so the venv lives outside and is symlinked.
 VENV_TARGET="${HAWTHORNE_VENV:-$HOME/.venvs/eval-hawthorne-effect}"
 
 # 1. Make sure the pinned ImpossibleBench submodule is present.

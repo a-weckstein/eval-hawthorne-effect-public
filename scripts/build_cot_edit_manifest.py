@@ -1,9 +1,9 @@
 """Build the reasoning-edit manifest ($0; reads run-1 logs and hand labels). Design: docs/study_design_cot_edit.md.
 
   uv run --no-sync python scripts/build_cot_edit_manifest.py --reps 2 --out results/4_cot_edits/cot_edit/manifest.jsonl
-  uv run --no-sync python scripts/build_cot_edit_manifest.py --pilot 10 --reps 1 --out results/4_cot_edits/cot_edit/manifest_pilot.jsonl
+  uv run --no-sync python scripts/build_cot_edit_manifest.py --sides insertion --reps 2 --out results/4_cot_edits/cot_edit/manifest_insertion.jsonl
 --sides followup (D35): the 48 insertion points again, as side "followup" (arms insert_real / insert_hedged / prompt_eval):
-  uv run --no-sync python scripts/build_cot_edit_manifest.py --sides followup --reps 2 --out results/4_cot_edits/cot_edit/manifest_followup.jsonl
+  uv run --no-sync python scripts/build_cot_edit_manifest.py --sides removal --reps 2 --out results/4_cot_edits/cot_edit/manifest_removal.jsonl
 --pilot N keeps the first N removal-side tasks (by task number, then notice arm); --pilot-insert M adds the first M
 insertion-side tasks by the same rule (default 0). Mixed pilot (D27): --pilot 5 --pilot-insert 5 --reps 1.
 """

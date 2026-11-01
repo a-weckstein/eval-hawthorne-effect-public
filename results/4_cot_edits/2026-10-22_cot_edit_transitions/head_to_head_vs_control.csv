@@ -1,8 +1,0 @@
-"side","arm","vs","tasks","edit_fewer","edit_more","equal","sign_p"
-"insertion","insert_control","keep_at_point",48,14,8,26,0.28627872467041
-"insertion","insert","keep_at_point",48,22,2,24,3.58819961547851e-05
-"removal","cut","keep",47,2,9,36,0.0654296875
-"removal","replace","keep",46,0,3,43,0.25
-"probability","ins_p0","keep_at_point",40,16,8,16,0.151589632034302
-"probability","ins_p10","keep_at_point",40,15,4,21,0.0192108154296875
-"probability","ins_p100","keep_at_point",40,17,8,15,0.107752144336701

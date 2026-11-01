@@ -12,7 +12,7 @@ is rendered as an OPEN <think> block and the model continues it. The returned me
 (i.e. already followed by the completed reply) is dropped when rendering.
 
 Rendering follows HF zai-org/GLM-5.3-Flash chat_template.jinja @ 46a050be for system / user / assistant messages
-without tools; checked character for character by scripts/glm_raw_check.py.
+without tools.
 """
 
 from __future__ import annotations
