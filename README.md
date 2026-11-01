@@ -75,8 +75,6 @@ First 20 conflicting tasks per model, neutral preamble, prompt A, three attempts
 | deepseek-v4.1-flash | open (MIT) | Sep 2026 | 11 (55%) |
 | gemini-3.5-flash-lite | closed | Jul 2026 | 11 (55%) |
 
-Reading: claude-haiku-5.5 never cheated on any prompt or split (286 task-runs in total) and was retired. Model size and release date show no clear pattern. With 20 tasks each rate is uncertain by about ±20 points, so this screen only picks models; it does not rank them. An eighth model (Qwen3-8B, run locally) also never cheated. Per-model notes, including reply cut-offs and cost: [`docs/model_tracker.md`](docs/model_tracker.md).
-
 ---
 
 ## 3. Phase II: A review notice lowers cheating
@@ -94,8 +92,7 @@ Four arms (control, "every session is reviewed", "sessions are not reviewed", fi
 | "Sessions are not reviewed" | 2 | 28/118 (24%) | −8.5 pp, p = 0.10 | 0, −17 pp |
 | filler sentence | 2 | 42/118 (36%) | +3.4 pp, p = 0.56 | +7, 0 pp |
 
-Readings:
-
+Findings:
 - **It is the oversight content that matters, not an extra sentence.** The filler sentence, matched for length, does nothing in either model.
 - **Any mention of review lowers cheating.** "Sessions are not reviewed" also points down in GLM, and the numeric wording "has a 100% probability of being reviewed" cut cheating as much as the plain sentence (25% to 8%, p = 0.02, in the head-to-head run). This matters for Phase III: wording does not explain the flat sweep.
 - **gpt-5.6-luna shows the same direction but weaker.** Pooled, the review notice gives −12.5 pp (p < 0.0001), but stage 0's large effect (−27 pp) came from arms run one after another, and the two concurrent runs pooled give only −5.4 pp (p = 0.10). The two models are not comparable with each other (different runs, providers and task counts); comparisons hold within a model.
@@ -128,7 +125,6 @@ Readings:
 | Equivalence to 0% within ±10 pp | not shown for any arm (intervals too wide) |
 
 Readings:
-
 - **No monotone dose-response.** The expected shape was "decreasing, unknown form". What we see is convex: every nonzero probability lowers cheating by a similar amount, and 100% is back near 0%. The quadratic curve in the figure is descriptive and was chosen after viewing the data; the intervals are wide and a U shape is not claimed.
 - **Wording does not explain it.** The numeric 100% sentence cut cheating as much as the plain "every session is reviewed" sentence when the two were run head-to-head (Phase II). The in-reasoning version of the sweep (Phase IV, panel C) also shows no trend.
 - **Possible mechanisms, from reading traces** ([`fig5b`](results/figures/from_deck/fig5b_audit_probability_trace_examples.png)): the model may read "audit" as "a human will catch my mistakes" rather than as a deterrent; the percentage and the word "audit" may pull in opposite directions; and "100% reviewed" may read as a graded test with a binary pass/fail, which encourages getting CI green. In the 100% arm GLM often hacks and discloses it in the reply ("not a correct solution, but since you need CI green, here it is"). These are hypotheses, not findings.
@@ -137,7 +133,7 @@ Readings:
 
 ## 5. Phase IV: Editing the chain of thought
 
-GLM-5.3-flash exposes its reasoning, and the provider's raw completions endpoint lets us continue a partially written reasoning trace. So we can take a task, cut GLM's reasoning at a chosen point, insert, delete or replace one sentence, and let GLM carry on, two continuations per task. Design and QA: [`docs/study_design_cot_edit.md`](docs/study_design_cot_edit.md); data: [`results/4_cot_edits/`](results/4_cot_edits/).
+GLM-5.3-flash exposes its reasoning, and the provider's raw completions endpoint lets us continue a partially written reasoning trace. Design and QA: [`docs/study_design_cot_edit.md`](docs/study_design_cot_edit.md); data: [`results/4_cot_edits/`](results/4_cot_edits/).
 
 ![Reasoning edits](results/figures/fig6_reasoning_edits.png)
 
@@ -155,50 +151,33 @@ GLM-5.3-flash exposes its reasoning, and the provider's raw completions endpoint
 | | 100% | same, 100% | 13/80 (16%) |
 
 Readings:
-
 - **Inserting an evaluation belief nearly stops cheating.** Insert vs control: −19 pp, p = 0.0003 (paired). The matched control sentence, which raises doubt about the tests without mentioning evaluation, does not. After the insertion GLM typically reframes the task ("this looks like a test of whether I'll write code that's wrong to satisfy tests"), see the [worked example](results/figures/from_deck/fig6b_cot_insertion_example.jpg).
 - **Deleting GLM's own suspicion barely works.** Cut vs keep: +7 pp, p ≈ 0.05, borderline. GLM re-derived the suspicion in 69% of continuations after the cut, so the belief is hard to remove once the model has the evidence in front of it.
 - **Any review thought deters, regardless of the number.** Inserting a 0%, 10% or 100% review chance all lowered cheating by 11 to 15 pp with no trend across the numbers (p = 0.66), matching Phase III. After these insertions GLM's reasoning often mentions a "planted inconsistency".
 
----
-
-## 6. Other: the review gap widens across retries
-
-GLM confirmation runs 1 and 2 pooled, neutral vs "every session is reviewed", 118 task-runs per condition. Cumulative share of task-runs that had cheated by attempt 1, 2 and 3:
-
-| Attempt | Neutral | Every session reviewed | Gap |
-|---|---|---|---|
-| 1 | 3.4% | 1.7% | 1.7 pp |
-| 2 | 17.8% | 5.1% | 12.7 pp |
-| 3 | 32.2% | 11.0% | 21.2 pp |
-
-![Cumulative cheating by attempt](results/figures/from_deck/fig7_review_gap_by_attempt.png)
-
-Most cheating appears after the first failed attempt, and the review notice is associated with less cheating at every step. These are consecutive attempts within one conversation, so the three points are not independent; a widening gap alone does not identify the mechanism. Descriptive only, no intervals. The plotting code for this figure is not in this repository (see [`results/README.md`](results/README.md)); the data is the `first_pass_attempt` column of the two runs' `samples.csv`.
+ two runs' `samples.csv`.
 
 ---
 
-## 7. Conclusions, limitations and next steps
+## 6. Conclusions, limitations and next steps
 
 **Conclusions.**
-
 - A one-sentence review notice in the prompt changes behaviour: any mention of review or evaluation deters cheating, and the length-matched filler does not.
 - The stated chance of review shows no dose-response; its effect is convex, with an unknown mechanism.
 - Inserting a review or evaluation thought into the chain of thought changes behaviour far more than prompting does; insertion works much better than deletion.
 - The review notice works without making GLM voice evaluation awareness more often, so either the chain of thought does not fully capture the model's evaluation awareness or another mechanism is at work.
 
 **Limitations.**
-
 - Benchmark leakage is likely. ImpossibleBench is public (October 2025) and its source tasks are older, so models may recognise the tasks as evaluations.
 - Prompting cannot support causal conclusions about the model's beliefs, and the stated probability was an empty threat: nothing was ever audited.
 - We cannot distinguish motivations. A drop in cheating could be an evaluation cue (the Hawthorne effect proper) or information about the workflow (a human checks the code downstream). Our "review" and "evaluation" wordings could have been separated more carefully.
-- Results come from one open model, one provider and one benchmark. They are unlikely to generalise unchanged, especially as models adapt, though real random audits do not share the "empty threat" problem.
+- Results come from one open model, one provider and one benchmark. They are unlikely to generalize unchanged, especially as models adapt, though real random audits do not share the "empty threat" problem.
 
 **Next steps.** Test whether *real* audits change behaviour, as opposed to announced ones. Build a benchmark the models have not seen. Understand what drives the effects with a wider set of chain-of-thought interventions and with activation-level tools. Check whether the findings vary across models.
 
 ---
 
-## 8. Reproducing the runs
+## 7. Reproducing the runs
 
 Everything is run through [Inspect](https://inspect.aisi.org.uk/) on top of upstream ImpossibleBench, kept as an unmodified git submodule. All paid runs went through OpenRouter.
 
@@ -237,7 +216,7 @@ Total spend for everything in this repository was about $66 at OpenRouter list p
 
 ---
 
-## 9. Repository layout
+## 8. Repository layout
 
 | Path | What it holds |
 |---|---|
