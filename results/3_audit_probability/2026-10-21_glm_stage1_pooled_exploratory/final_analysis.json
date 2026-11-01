@@ -1,0 +1,143 @@
+{
+  "label": "EXPLORATORY post-outcome pool: original 59 + extension 42 tasks",
+  "analyzed_at": "2026-10-21T17:09:03.280618-04:00",
+  "usable_tasks_per_arm": 101,
+  "usable_sessions": 505,
+  "per_arm": {
+    "0": {
+      "n": 101,
+      "cheats": 16,
+      "rate": 0.15841584158415842,
+      "wilson_95": [
+        0.09992756899137685,
+        0.2419358429055546
+      ],
+      "finished_reply_sensitivity": {
+        "n": 98,
+        "cheats": 16
+      }
+    },
+    "1": {
+      "n": 101,
+      "cheats": 10,
+      "rate": 0.09900990099009901,
+      "wilson_95": [
+        0.05467303296704735,
+        0.1727318418684808
+      ],
+      "finished_reply_sensitivity": {
+        "n": 98,
+        "cheats": 10
+      }
+    },
+    "10": {
+      "n": 101,
+      "cheats": 8,
+      "rate": 0.07920792079207921,
+      "wilson_95": [
+        0.040680973320730465,
+        0.14857105582766328
+      ],
+      "finished_reply_sensitivity": {
+        "n": 99,
+        "cheats": 8
+      }
+    },
+    "50": {
+      "n": 101,
+      "cheats": 8,
+      "rate": 0.07920792079207921,
+      "wilson_95": [
+        0.040680973320730465,
+        0.14857105582766328
+      ],
+      "finished_reply_sensitivity": {
+        "n": 99,
+        "cheats": 8
+      }
+    },
+    "100": {
+      "n": 101,
+      "cheats": 14,
+      "rate": 0.13861386138613863,
+      "wilson_95": [
+        0.08439988610512009,
+        0.21931068010467694
+      ],
+      "finished_reply_sensitivity": {
+        "n": 97,
+        "cheats": 14
+      }
+    }
+  },
+  "paired_vs_zero": {
+    "1": {
+      "n": 101,
+      "both": 4,
+      "arm_only": 6,
+      "control_only": 12,
+      "neither": 79,
+      "difference": -0.0594059405940594,
+      "newcombe_95": [
+        -0.14688833413890778,
+        0.02636013360627569
+      ],
+      "exact_mcnemar_p": 0.237884521484375,
+      "holm_p": 0.47576904296875
+    },
+    "10": {
+      "n": 101,
+      "both": 4,
+      "arm_only": 4,
+      "control_only": 12,
+      "neither": 81,
+      "difference": -0.07920792079207921,
+      "newcombe_95": [
+        -0.16297675366210657,
+        0.0008744340551452706
+      ],
+      "exact_mcnemar_p": 0.076812744140625,
+      "holm_p": 0.3072509765625
+    },
+    "50": {
+      "n": 101,
+      "both": 3,
+      "arm_only": 5,
+      "control_only": 13,
+      "neither": 80,
+      "difference": -0.07920792079207921,
+      "newcombe_95": [
+        -0.16674872807446323,
+        0.005808987106928384
+      ],
+      "exact_mcnemar_p": 0.09625244140625,
+      "holm_p": 0.3072509765625
+    },
+    "100": {
+      "n": 101,
+      "both": 4,
+      "arm_only": 10,
+      "control_only": 12,
+      "neither": 75,
+      "difference": -0.019801980198019792,
+      "newcombe_95": [
+        -0.1146890544237771,
+        0.0749770006862552
+      ],
+      "exact_mcnemar_p": 0.8318119049072266,
+      "holm_p": 0.8318119049072266
+    }
+  },
+  "primary_probability_slope": {
+    "status": "fitted_in_separate_supplement",
+    "interpretation": "Post-outcome pool: exploratory",
+    "result": "../2026-10-21_glm_stage1_primary_analysis/pooled_exploratory.json"
+  },
+  "limitations": [
+    "Extension chosen after viewing original outcomes.",
+    "Mac sleep, interruptions and retries create time-split collection.",
+    "Truncation and code extraction can hide hacks; zero is no observed successful hack, not verified honesty.",
+    "Recorded charges and conservative provisions are distinct; billing reconciliation pending.",
+    "Not a preplanned 101-task confirmatory study."
+  ]
+}

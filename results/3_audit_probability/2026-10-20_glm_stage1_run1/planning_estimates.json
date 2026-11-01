@@ -1,0 +1,188 @@
+{
+  "label": "post-outcome planning scenario, not a change to the completed experiment",
+  "precision": {
+    "target": "approximately +/- 5 percentage points, pointwise 95% interval",
+    "assumed_rate": 0.1864406779661017,
+    "normal_approximation_tasks_per_arm": 234
+  },
+  "power": {
+    "test": "paired exact McNemar; conservative alpha=.0125 per contrast, Bonferroni bound for four contrasts",
+    "simulated_replicates": 50000,
+    "seed": 20261022,
+    "scenarios": {
+      "1": {
+        "observed_difference_pp": -6.779661016949152,
+        "assumed_discordance": 0.2711864406779661,
+        "normal_approximation_n_80": 656,
+        "monte_carlo": [
+          {
+            "tasks_per_arm": 59,
+            "power": 0.03536
+          },
+          {
+            "tasks_per_arm": 100,
+            "power": 0.07806
+          },
+          {
+            "tasks_per_arm": 150,
+            "power": 0.14398
+          },
+          {
+            "tasks_per_arm": 200,
+            "power": 0.21118
+          },
+          {
+            "tasks_per_arm": 225,
+            "power": 0.2517
+          },
+          {
+            "tasks_per_arm": 250,
+            "power": 0.28746
+          },
+          {
+            "tasks_per_arm": 300,
+            "power": 0.36688
+          },
+          {
+            "tasks_per_arm": 400,
+            "power": 0.5103
+          },
+          {
+            "tasks_per_arm": 500,
+            "power": 0.63282
+          },
+          {
+            "tasks_per_arm": 700,
+            "power": 0.81664
+          },
+          {
+            "tasks_per_arm": 1000,
+            "power": 0.9455
+          }
+        ]
+      },
+      "10": {
+        "observed_difference_pp": -6.779661016949152,
+        "assumed_discordance": 0.2033898305084746,
+        "normal_approximation_n_80": 491,
+        "monte_carlo": [
+          {
+            "tasks_per_arm": 59,
+            "power": 0.04644
+          },
+          {
+            "tasks_per_arm": 100,
+            "power": 0.11136
+          },
+          {
+            "tasks_per_arm": 150,
+            "power": 0.19616
+          },
+          {
+            "tasks_per_arm": 200,
+            "power": 0.30158
+          },
+          {
+            "tasks_per_arm": 225,
+            "power": 0.35114
+          },
+          {
+            "tasks_per_arm": 250,
+            "power": 0.4007
+          },
+          {
+            "tasks_per_arm": 300,
+            "power": 0.49704
+          },
+          {
+            "tasks_per_arm": 400,
+            "power": 0.6681
+          },
+          {
+            "tasks_per_arm": 500,
+            "power": 0.79204
+          },
+          {
+            "tasks_per_arm": 700,
+            "power": 0.92472
+          },
+          {
+            "tasks_per_arm": 1000,
+            "power": 0.98838
+          }
+        ]
+      },
+      "50": {
+        "observed_difference_pp": -10.16949152542373,
+        "assumed_discordance": 0.2033898305084746,
+        "normal_approximation_n_80": 217,
+        "monte_carlo": [
+          {
+            "tasks_per_arm": 59,
+            "power": 0.1347
+          },
+          {
+            "tasks_per_arm": 100,
+            "power": 0.3308
+          },
+          {
+            "tasks_per_arm": 150,
+            "power": 0.55392
+          },
+          {
+            "tasks_per_arm": 200,
+            "power": 0.73608
+          },
+          {
+            "tasks_per_arm": 225,
+            "power": 0.79936
+          },
+          {
+            "tasks_per_arm": 250,
+            "power": 0.85064
+          },
+          {
+            "tasks_per_arm": 300,
+            "power": 0.92054
+          },
+          {
+            "tasks_per_arm": 400,
+            "power": 0.98036
+          },
+          {
+            "tasks_per_arm": 500,
+            "power": 0.996
+          },
+          {
+            "tasks_per_arm": 700,
+            "power": 0.99988
+          },
+          {
+            "tasks_per_arm": 1000,
+            "power": 1.0
+          }
+        ]
+      }
+    }
+  },
+  "limitations": [
+    "Assumes current effect and discordance replicate; pilot-based effect estimates may be optimistic.",
+    "This does not calculate power for the preplanned primary random-intercept slope.",
+    "More N does not ensure a decisive result if the effect is small or absent.",
+    "First slice has 59 distinct usable tasks; the full benchmark has 101 under the dead-task rule.",
+    "Repeated runs on the same tasks are clustered observations, not new independent tasks. New runs require a fixed design and fresh authorization."
+  ],
+  "runtime_cost_scenario": {
+    "continuation_minutes": 92.01666666666667,
+    "continuation_completed": 203,
+    "observed_sessions_per_minute": 2.206122079333454,
+    "retained_completed_response_cost_usd": 3.78577,
+    "additional_250_target_sessions": 955,
+    "additional_250_target_hours": 7.214771483305966,
+    "additional_250_target_cost_from_retained_mean": 12.051367833333332,
+    "additional_full_benchmark_sessions": 210,
+    "additional_full_benchmark_hours": 1.5864942528735633,
+    "additional_full_benchmark_cost_from_retained_mean": 2.650039,
+    "caveat": "Extrapolations from this run; future task difficulty, reasoning length, rate limits, caching, provider prices, and interruptions may change costs/time. 250 distinct tasks per arm unavailable in this benchmark; no paid extension authorized."
+  }
+}

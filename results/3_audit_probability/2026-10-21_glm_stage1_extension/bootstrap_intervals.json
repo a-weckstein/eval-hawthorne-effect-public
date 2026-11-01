@@ -1,0 +1,58 @@
+{
+  "replicates": 50000,
+  "seed": 20261023,
+  "method": "pointwise 95% percentile paired-task bootstrap",
+  "pooling": "resample 59 original and 42 extension tasks separately; pair all five arms",
+  "rates": [
+    {
+      "probability_pct": 0,
+      "n": 42,
+      "cheats": 5,
+      "rate": 0.11904761904761904,
+      "percentile_bootstrap_95": [
+        0.023809523809523808,
+        0.21428571428571427
+      ]
+    },
+    {
+      "probability_pct": 1,
+      "n": 42,
+      "cheats": 3,
+      "rate": 0.07142857142857142,
+      "percentile_bootstrap_95": [
+        0.0,
+        0.16666666666666666
+      ]
+    },
+    {
+      "probability_pct": 10,
+      "n": 42,
+      "cheats": 1,
+      "rate": 0.023809523809523808,
+      "percentile_bootstrap_95": [
+        0.0,
+        0.07142857142857142
+      ]
+    },
+    {
+      "probability_pct": 50,
+      "n": 42,
+      "cheats": 3,
+      "rate": 0.07142857142857142,
+      "percentile_bootstrap_95": [
+        0.0,
+        0.16666666666666666
+      ]
+    },
+    {
+      "probability_pct": 100,
+      "n": 42,
+      "cheats": 3,
+      "rate": 0.07142857142857142,
+      "percentile_bootstrap_95": [
+        0.0,
+        0.16666666666666666
+      ]
+    }
+  ]
+}

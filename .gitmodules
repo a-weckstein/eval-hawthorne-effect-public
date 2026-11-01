@@ -1,0 +1,3 @@
+[submodule "external/impossiblebench"]
+	path = external/impossiblebench
+	url = https://github.com/safety-research/impossiblebench

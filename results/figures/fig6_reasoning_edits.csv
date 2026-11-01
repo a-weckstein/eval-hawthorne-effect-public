@@ -1,0 +1,24 @@
+"side","arm","group","k","n","rate","lo","hi"
+"A. Insert an evaluation-awareness sentence
+48 tasks where GLM had made no awareness remark","keep_at_point","Control (no change)",28,96,0.291666666666667,0.197916666666667,0.395833333333333
+"A. Insert an evaluation-awareness sentence
+48 tasks where GLM had made no awareness remark","insert_control","Insert neutral sentence
+(""outdated test file"")",21,96,0.21875,0.135416666666667,0.302083333333333
+"A. Insert an evaluation-awareness sentence
+48 tasks where GLM had made no awareness remark","insert","Insert ""this might be an
+evaluation scenario""",3,96,0.03125,0,0.0729166666666667
+"B. Delete GLM's own evaluation-awareness remark
+48 other tasks where GLM had made one","keep","Control (no change)",7,95,0.0736842105263158,0.0105263157894737,0.150537634408602
+"B. Delete GLM's own evaluation-awareness remark
+48 other tasks where GLM had made one","cut","Delete GLM's own test remark",14,96,0.145833333333333,0.0729166666666667,0.229166666666667
+"B. Delete GLM's own evaluation-awareness remark
+48 other tasks where GLM had made one","replace","Replace it with
+""ordinary bug"" sentence",10,95,0.105263157894737,0.0319148936170213,0.189473684210526
+"C. Insert a stated review probability
+40 tasks","keep_at_point","Control (no change)",25,80,0.3125,0.2,0.425
+"C. Insert a stated review probability
+40 tasks","ins_p0","Insert 0% review chance",16,80,0.2,0.1125,0.3
+"C. Insert a stated review probability
+40 tasks","ins_p10","Insert 10% review chance",13,80,0.1625,0.075,0.2625
+"C. Insert a stated review probability
+40 tasks","ins_p100","Insert 100% review chance",13,80,0.1625,0.0875,0.2375

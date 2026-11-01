@@ -1,0 +1,22 @@
+{
+  "status": "complete",
+  "completed_task_sessions": 300,
+  "per_arm": {
+    "audit_0": 60,
+    "audit_1": 60,
+    "audit_10": 60,
+    "audit_50": 60,
+    "audit_100": 60
+  },
+  "remaining_task_sessions": 0,
+  "active_log_dir": "logs/glm_stage1_resume2",
+  "statuses": {
+    "audit_0": "success",
+    "audit_1": "success",
+    "audit_10": "success",
+    "audit_50": "success",
+    "audit_100": "success"
+  },
+  "budget_charged_or_reserved_usd": 7.137210332,
+  "stopped_reason": null
+}

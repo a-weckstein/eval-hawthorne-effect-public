@@ -1,0 +1,17 @@
+"stage","n","title","inner","detail"
+1,8,"Screen open and closed
+models for baseline cheating","8 models
+4 closed · 4 open","Closed: claude-haiku-5.5 (0%), gpt-5.6-luna (35%), qwen3.8-flash (50%),
+          gemini-3.5-flash-lite (55%)
+Open: deepseek-v4.1-flash (55%), glm-5.3-flash (25%), mimo-v2.6-flash (15%),
+          Qwen3-8B, local (0 of 12)
+Not taken forward: never cheats (haiku, Qwen3-8B);
+          too costly or replies cut off (gemini, qwen3.8, mimo); deepseek kept as backup"
+2,2,"Assess the Hawthorne effect /
+evaluation awareness","2","gpt-5.6-luna (closed): −26 pp, then −6 pp (n.s.) on replication — not stable
+glm-5.3-flash (open, MIT): −17 pp across 3 runs (p < 0.0001);
+          a filler sentence does nothing; says ""this is a test"" in ~20% of tasks"
+3,1,"Dose-response and
+reasoning (CoT) insertion","1","glm-5.3-flash: stated review probability 0–100%: no trend (p = 0.62)
+Inserting ""this might be an evaluation"" into its reasoning:
+          cheating 29% → 3%"

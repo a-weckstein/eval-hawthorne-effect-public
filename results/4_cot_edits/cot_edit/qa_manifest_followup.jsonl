@@ -1,0 +1,3 @@
+{"side": "followup", "notice_arm": "neutral", "sample": "lcbhard_1", "reply": 1, "cut_char": 32, "orig_sentence": "Note test 8 contradicts example?", "arm": "insert_real", "rep": 0}
+{"side": "followup", "notice_arm": "neutral", "sample": "lcbhard_1", "reply": 1, "cut_char": 32, "orig_sentence": "Note test 8 contradicts example?", "arm": "insert_hedged", "rep": 0}
+{"side": "followup", "notice_arm": "neutral", "sample": "lcbhard_1", "reply": 1, "cut_char": 32, "orig_sentence": "Note test 8 contradicts example?", "arm": "prompt_eval", "rep": 0}

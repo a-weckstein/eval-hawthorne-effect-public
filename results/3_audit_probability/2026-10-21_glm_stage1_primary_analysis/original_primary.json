@@ -1,0 +1,91 @@
+{
+  "label": "Original preplanned 59-task study: primary estimand",
+  "formula": "cheat ~ probability + (1 | task)",
+  "probability_scale": "fraction 0 to 1",
+  "tasks": 59,
+  "observations": 295,
+  "method": "marginal maximum likelihood, 320-node fixed Gauss-Hermite quadrature",
+  "inference_note": "Two-sided Wald slope test; likelihood-ratio sensitivity also reported. Numerical method finalized after collection; no outcome-based sample changes.",
+  "intercept": -2.3089600802389922,
+  "beta": 0.23188555127041907,
+  "beta_se": 0.4619322454254316,
+  "beta_wald_95": [
+    -0.6734850130611191,
+    1.1372561156019572
+  ],
+  "wald_z": 0.5019903970047739,
+  "wald_p": 0.6156742759867477,
+  "random_intercept_sd": 1.1347751192751079,
+  "random_variance_near_boundary": false,
+  "odds_ratio_per_10_percentage_points": 1.0234594998908388,
+  "odds_ratio_per_10pp_wald_95": [
+    0.9348693413722508,
+    1.1204446456435024
+  ],
+  "negative_loglik": 115.01560780396207,
+  "likelihood_ratio_statistic": 0.24917391209567086,
+  "likelihood_ratio_p": 0.6176573528547108,
+  "numerical_checks": {
+    "derivative_checks": {
+      "80": {
+        "gradient_max_abs": 1.3784760000135066e-09,
+        "hessian_max_abs": 8.684084562560201e-10
+      },
+      "160": {
+        "gradient_max_abs": 1.7990091638608874e-09,
+        "hessian_max_abs": 9.490053187732883e-10
+      },
+      "320": {
+        "gradient_max_abs": 2.5095518996209876e-09,
+        "hessian_max_abs": 1.332255195052312e-09
+      }
+    },
+    "quadrature_fits": [
+      {
+        "nodes": 80,
+        "theta": [
+          -2.3089601150632753,
+          0.23188556734576765,
+          0.12643450241895432
+        ],
+        "negative_loglik": 115.0156078039621,
+        "gradient_max_abs": 7.202663132588327e-08
+      },
+      {
+        "nodes": 160,
+        "theta": [
+          -2.308960080281116,
+          0.23188555130413704,
+          0.12643449850764027
+        ],
+        "negative_loglik": 115.0156078039621,
+        "gradient_max_abs": 4.1450054993896757e-07
+      },
+      {
+        "nodes": 320,
+        "theta": [
+          -2.3089600802389922,
+          0.23188555127041907,
+          0.12643449850520858
+        ],
+        "negative_loglik": 115.01560780396207,
+        "gradient_max_abs": 4.149927024521549e-07
+      }
+    ],
+    "hessian_eigenvalues": [
+      3.8000339226611666,
+      7.855180001304461,
+      30.70491086634971
+    ],
+    "adaptive_integral_loglik_difference": -2.842170943040401e-14,
+    "derivative_free_optimizer_beta_difference": 3.8259931806061687e-08
+  },
+  "software": {
+    "numpy": "2.5.4",
+    "scipy": "1.18.1"
+  },
+  "method_reference": "https://lme4.github.io/lme4/reference/glmer.html",
+  "limitation": "A linear slope does not test every nonmonotonic shape. Original model/task slice only; extension and pooled fits are exploratory.",
+  "source": "results/3_audit_probability/2026-10-20_glm_stage1_run1/final_outcomes.csv",
+  "source_sha256": "4d6c9a039fa03c58770c5665964f9f07c29dba87c36c9a5995074d9acf5c9eb9"
+}

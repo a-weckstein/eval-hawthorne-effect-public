@@ -1,0 +1,12 @@
+{
+  "status": "secondary_complete_primary_pending",
+  "collection": "300/300 completed",
+  "primary_probability_slope": {
+    "status": "pending",
+    "formula": "cheat ~ probability + (1 | task)",
+    "probability_scale": "fraction 0 to 1",
+    "reason": "Rscript/lme4 unavailable locally; SciPy/statsmodels also absent. No different primary test substituted."
+  },
+  "paired_tests": "exact McNemar versus 0%, Holm across four contrasts; complete",
+  "dead_task_rule": "lcbhard_35 excluded; n=59 per arm"
+}

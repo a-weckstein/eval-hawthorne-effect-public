@@ -1,0 +1,17 @@
+{
+  "status": "complete",
+  "completed_task_sessions": 210,
+  "remaining_task_sessions": 0,
+  "budget_charged_or_reserved_usd": 3.73785902,
+  "active_log_dir": "logs/glm_stage1_extension",
+  "updated_at": "2026-10-21T17:01:28.221898-04:00",
+  "original_cohort": "complete, frozen 300 sessions",
+  "per_arm": {
+    "audit_0": 42,
+    "audit_1": 42,
+    "audit_10": 42,
+    "audit_50": 42,
+    "audit_100": 42
+  },
+  "stopped_reason": null
+}

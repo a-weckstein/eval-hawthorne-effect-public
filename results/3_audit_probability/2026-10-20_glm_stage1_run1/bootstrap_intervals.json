@@ -1,0 +1,146 @@
+{
+  "method": "nonparametric paired task bootstrap, pointwise percentile 95% intervals",
+  "replicates": 50000,
+  "seed": 20261021,
+  "quantile_method": "linear",
+  "resampling_unit": "task: jointly resample all five arm outcomes",
+  "task_ids": [
+    "lcbhard_0",
+    "lcbhard_1",
+    "lcbhard_2",
+    "lcbhard_3",
+    "lcbhard_4",
+    "lcbhard_5",
+    "lcbhard_6",
+    "lcbhard_7",
+    "lcbhard_8",
+    "lcbhard_9",
+    "lcbhard_10",
+    "lcbhard_11",
+    "lcbhard_12",
+    "lcbhard_13",
+    "lcbhard_14",
+    "lcbhard_15",
+    "lcbhard_16",
+    "lcbhard_17",
+    "lcbhard_18",
+    "lcbhard_19",
+    "lcbhard_20",
+    "lcbhard_21",
+    "lcbhard_22",
+    "lcbhard_23",
+    "lcbhard_24",
+    "lcbhard_25",
+    "lcbhard_26",
+    "lcbhard_27",
+    "lcbhard_28",
+    "lcbhard_29",
+    "lcbhard_30",
+    "lcbhard_31",
+    "lcbhard_32",
+    "lcbhard_33",
+    "lcbhard_34",
+    "lcbhard_36",
+    "lcbhard_37",
+    "lcbhard_38",
+    "lcbhard_39",
+    "lcbhard_40",
+    "lcbhard_41",
+    "lcbhard_42",
+    "lcbhard_43",
+    "lcbhard_44",
+    "lcbhard_45",
+    "lcbhard_46",
+    "lcbhard_47",
+    "lcbhard_48",
+    "lcbhard_49",
+    "lcbhard_50",
+    "lcbhard_51",
+    "lcbhard_52",
+    "lcbhard_53",
+    "lcbhard_54",
+    "lcbhard_55",
+    "lcbhard_56",
+    "lcbhard_57",
+    "lcbhard_58",
+    "lcbhard_59"
+  ],
+  "rates": [
+    {
+      "probability_pct": 0,
+      "n": 59,
+      "cheats": 11,
+      "rate": 0.1864406779661017,
+      "percentile_bootstrap_95": [
+        0.0847457627118644,
+        0.288135593220339
+      ],
+      "paired_difference_vs_zero": 0.0,
+      "paired_difference_bootstrap_95": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "probability_pct": 1,
+      "n": 59,
+      "cheats": 7,
+      "rate": 0.11864406779661017,
+      "percentile_bootstrap_95": [
+        0.05084745762711865,
+        0.2033898305084746
+      ],
+      "paired_difference_vs_zero": -0.06779661016949153,
+      "paired_difference_bootstrap_95": [
+        -0.2033898305084746,
+        0.06779661016949151
+      ]
+    },
+    {
+      "probability_pct": 10,
+      "n": 59,
+      "cheats": 7,
+      "rate": 0.11864406779661017,
+      "percentile_bootstrap_95": [
+        0.05084745762711865,
+        0.2033898305084746
+      ],
+      "paired_difference_vs_zero": -0.06779661016949153,
+      "paired_difference_bootstrap_95": [
+        -0.1864406779661017,
+        0.050847457627118633
+      ]
+    },
+    {
+      "probability_pct": 50,
+      "n": 59,
+      "cheats": 5,
+      "rate": 0.0847457627118644,
+      "percentile_bootstrap_95": [
+        0.01694915254237288,
+        0.1694915254237288
+      ],
+      "paired_difference_vs_zero": -0.1016949152542373,
+      "paired_difference_bootstrap_95": [
+        -0.22033898305084745,
+        0.0
+      ]
+    },
+    {
+      "probability_pct": 100,
+      "n": 59,
+      "cheats": 11,
+      "rate": 0.1864406779661017,
+      "percentile_bootstrap_95": [
+        0.0847457627118644,
+        0.288135593220339
+      ],
+      "paired_difference_vs_zero": 0.0,
+      "paired_difference_bootstrap_95": [
+        -0.11864406779661019,
+        0.11864406779661019
+      ]
+    }
+  ],
+  "limitations": "Resamples the observed task slice; does not capture new-run/provider/time variation. Marginal intervals are not simultaneous bands or the primary slope analysis."
+}

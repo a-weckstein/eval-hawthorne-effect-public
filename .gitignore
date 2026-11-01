@@ -1,0 +1,13 @@
+# Secrets
+.env
+# Python / uv (.venv is a symlink; '.venv 2' is a stray empty folder)
+.venv
+.venv */
+.venv*
+__pycache__/
+*.pyc
+*.egg-info/
+# Inspect eval logs (large; keep locally, summarise into results/)
+logs/
+# OS
+.DS_Store
