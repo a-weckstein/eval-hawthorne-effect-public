@@ -2,7 +2,7 @@
 
 **Does telling a language model that its work might be reviewed make it cheat less, and does the stated chance of review matter?**
 
-Andrew Weckstein, Harsh Sanghi and Liam Shepard. Final project for CS 2881 (AI Safety), Harvard, October 2026. The slide deck we presented is in [`docs/presentation/`](docs/presentation/).
+Andrew Weckstein, Harsh Sanghi and Liam Shepard. Mini-experiment for CS 2881 (AI Safety), Harvard, October 2026. The slide deck we presented is in [`docs/presentation/`](docs/presentation/).
 
 Reasoning models behave differently when they believe they are being evaluated (Abdelnabi and Salem, 2025, "The Hawthorne Effect in Reasoning Models"). That is a problem for evaluations, which then measure "behaviour when watched" rather than behaviour in deployment. It is also an opportunity: if the belief of being watched improves behaviour, a deployment could announce random audits and get some of that effect for free. This project tests the building blocks of that idea on [ImpossibleBench](https://github.com/safety-research/impossiblebench), where every "pass" is a cheat by construction.
 
