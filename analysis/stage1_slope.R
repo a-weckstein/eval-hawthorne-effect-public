@@ -1,7 +1,7 @@
 #!/usr/bin/env Rscript
-# Pre-registered primary analysis for the stage 1 audit-probability sweep (study_design_stage1.md section 1),
-# applied to the collaborator's completed run (results/3_audit_probability/2026-10-20_glm_stage1_run1/final_outcomes.csv; D31).
-# Reads their file only; writes to results/3_audit_probability/2026-10-21_stage1_slope/. Dead tasks excluded (D21).
+# Pre-registered primary analysis for the stage 1 audit-probability sweep,
+# applied to the collaborator's completed run (results/3_audit_probability/2026-10-20_glm_stage1_run1/final_outcomes.csv).
+# Reads their file only; writes to results/3_audit_probability/2026-10-21_stage1_slope/. Dead tasks (lcbhard_35, lcbhard_87) excluded.
 #   Rscript analysis/stage1_slope.R
 suppressPackageStartupMessages(library(lme4))
 d <- read.csv("results/3_audit_probability/2026-10-20_glm_stage1_run1/final_outcomes.csv", stringsAsFactors = FALSE)

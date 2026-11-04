@@ -1,4 +1,4 @@
-"""Build the reasoning-edit manifest ($0; reads run-1 logs and hand labels). Design: docs/study_design_cot_edit.md.
+"""Build the reasoning-edit manifest ($0; reads run-1 logs and hand labels). Design: README §5 and src/hawthorne/cot_edit.py.
 
   uv run --no-sync python scripts/build_cot_edit_manifest.py --reps 2 --out results/4_cot_edits/cot_edit/manifest.jsonl
   uv run --no-sync python scripts/build_cot_edit_manifest.py --sides insertion --reps 2 --out results/4_cot_edits/cot_edit/manifest_insertion.jsonl

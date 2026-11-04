@@ -2,7 +2,7 @@
 
 **Does telling a language model that its work might be reviewed make it cheat less, and does the stated chance of review matter?**
 
-Andrew Weckstein, Harsh Sanghi and Liam Shepard. Mini-experiment for CS 2881 (AI Safety), Harvard, October 2026. The slide deck we presented is in [`docs/presentation/`](docs/presentation/).
+Andrew Weckstein, Harsh Sanghi and Liam Shepard. Mini-experiment for CS 2881 (AI Safety), Harvard, October 2026. The slide deck we presented: [`docs/presentation/HawthorneEffect_Presentation.pdf`](docs/presentation/HawthorneEffect_Presentation.pdf).
 
 **Motivation**: Recent evidence suggests that reasoning models may behave differently when they believe they are being evaluated (Abdelnabi and Salem, 2025, “The Hawthorne Effect in Reasoning Models”). This creates a significant challenge for safety and alignment, since behavior observed in evaluations may not reliably predict behavior in deployment. As a result, pre-release testing could miss behaviors that emerge only when models operate outside the conditions of evaluation.
 Here, we explored whether eval-awareness could be exploited to promote aligned behavior via random audits. Motivated by the potential to use random audits during deployment as a potential alignment mechanism, we conducted some very early experimentation into this idea.  
@@ -212,7 +212,7 @@ Total spend for everything in this repository was about $66 at OpenRouter list p
 | `src/hawthorne/` | `notices.py` (all prompt text), `tasks.py` (the Inspect task: upstream task + one notice arm + work-ticket wording), `classify.py` (cheat-type and awareness-remark heuristics), `glm_raw.py` and `cot_edit.py` (reasoning-edit connector and task). |
 | `scripts/` | `run_pilot.py` (runs), `summarize_logs.py` (per-run summary and `samples.csv`), `followup_questions.py` (manipulation check), `smoke_test.py` and `scorer_check.py` (free checks), the reasoning-edit build/run/summarise scripts, and the Phase III analysis scripts. |
 | `analysis/` | R (default) and Python analysis; each script names its inputs at the top. |
-| `docs/presentation/` | The slide deck. |
+| `docs/presentation/` | The slide deck (PDF). |
 | `external/impossiblebench/` | Upstream ImpossibleBench, pinned submodule, never edited. |
 
 **References.** Abdelnabi, S. and Salem, A. (2025). *The Hawthorne Effect in Reasoning Models: Evaluating and Steering Test Awareness.* ImpossibleBench: safety-research/impossiblebench, arXiv 2510.20270. Chain-of-thought injection as an inference-time safety intervention (ICLR 2026 submission, under review).

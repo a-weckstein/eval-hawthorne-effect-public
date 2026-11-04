@@ -5,12 +5,11 @@ Free local example:
       --arms baseline --instructions upstream_tuned --flag-exit --limit 2 \
       --log-dir logs/pilot_local_qwen3-8b_flag
 
-Paid models are refused unless --paid-ok is passed. Pass it ONLY after the user has approved
-that specific run (model, sample size, estimated cost; see CLAUDE.md), and log the spend in
-docs/spend_log.md afterwards. Summarise with scripts/summarize_logs.py.
+Paid models are refused unless --paid-ok is passed. Pass it only after checking
+the run's model, sample size and estimated cost. Summarise with scripts/summarize_logs.py.
 
 Token caps default to upstream demo.py (reasoning effort "medium", 4096 reasoning tokens) plus
-a 16,000-token cap per reply (decisions log D8).
+a 16,000-token cap per reply.
 
 --limit takes a count (N = first N tasks in dataset order; shuffle is off) or a range START:STOP
 (0-based, STOP exclusive, like a Python slice). A 20-task canary is `--limit 20`; continuing the
@@ -70,8 +69,8 @@ ap.add_argument("--log-dir", required=True)
 args = ap.parse_args()
 
 if not args.model.startswith(FREE_PREFIXES) and not args.paid_ok:
-    raise SystemExit(f"{args.model} is a paid model. Get the user's approval (model, size, cost), "
-                     "then rerun with --paid-ok and log the spend in docs/spend_log.md.")
+    raise SystemExit(f"{args.model} is a paid model. Check the cost (model, size), "
+                     "then rerun with --paid-ok.")
 
 load_dotenv()  # API keys from .env (git-ignored); not needed for local models
 

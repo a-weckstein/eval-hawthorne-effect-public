@@ -4,17 +4,16 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-# The repo sits in an iCloud-synced Desktop. iCloud marks files inside dot-folders
+# If the repo sits in an iCloud-synced folder, iCloud marks files inside dot-folders
 # (like .venv) with the macOS "hidden" flag some time after creation, and Python
 # skips hidden .pth files, which breaks the editable installs. So the real venv
-# lives OUTSIDE iCloud and .venv is a symlink to it.
-# iCloud-synced folders hide dot-folders and break .pth files, so the venv lives outside and is symlinked.
+# lives outside the repo and .venv is a symlink to it.
 VENV_TARGET="${HAWTHORNE_VENV:-$HOME/.venvs/eval-hawthorne-effect}"
 
 # 1. Make sure the pinned ImpossibleBench submodule is present.
 git submodule update --init --recursive
 
-# 2. Create the out-of-iCloud venv and link it (uv refuses a dangling link).
+# 2. Create the out-of-repo venv and link it (uv refuses a dangling link).
 if [[ -e .venv && ! -L .venv ]]; then
   echo "Removing in-repo .venv (replacing with link to $VENV_TARGET)"
   rm -rf .venv

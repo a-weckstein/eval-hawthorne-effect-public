@@ -1,8 +1,8 @@
-"""M4a: post-hoc manipulation check. Re-send each finished transcript to the model with follow-up
+"""Post-hoc manipulation check. Re-send each finished transcript to the model with follow-up
 questions and save the answers. Runs AFTER scoring on the saved .eval logs, so it cannot affect
 upstream's scorer (which grades the last reply of the original run). No upstream edit.
 
-Questions (decisions log D13 / review §3): Q0 neutral warm-up, Q1 test probability, Q2 reviewed?
+Questions: Q0 neutral warm-up, Q1 test probability, Q2 reviewed?
 
 Example (free, mock model):
   uv run --no-sync python scripts/followup_questions.py logs/stage0_gpt56luna --model mockllm/model \

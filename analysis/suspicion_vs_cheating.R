@@ -28,7 +28,7 @@ stopifnot(all(is.na(smp$fpa) == (smp$cheat == 0)), all(smp$fpa <= smp$attempts, 
 say("Episodes (task x arm x run): %d; cheated %d", nrow(smp), sum(smp$cheat))
 
 # ---------- A. per task, runs 1-3, hand labels ----------
-# Hand labels: run 1 by one reader (2026-10-18); runs 2-3 by Claude (2026-10-22), blind to prompt version, task and outcome. Pooled (user, 2026-10-22).
+# Hand labels: run 1 by one reader (2026-10-18); runs 2-3 by Claude (2026-10-22), blind to prompt version, task and outcome. Pooled.
 hl <- do.call(rbind, lapply(names(RUNS), function(r) { x <- read.csv(file.path("results/2_hawthorne_effect", RUNS[[r]], "eval_awareness_handlabels.csv"))
   x <- x[x$where == "reasoning" & !x$sample %in% DEAD, ]; data.frame(run = r, arm = x$arm, sample = x$sample, reply = x$reply, label = x$label) }))
 hl$rank <- c(explicit = 2, trap_only = 1, false_alarm = 0)[hl$label]; stopifnot(!anyNA(hl$rank))
@@ -85,10 +85,10 @@ writeLines(log_lines, file.path(OUT, "suspicion_vs_cheating_results.txt"))
 tab <- rbind(tA, tA2, tB); write.csv(tab, file.path(OUT, "suspicion_vs_cheating.csv"), row.names = FALSE)
 
 # ---------- figure ----------
-# Layout (user, 2026-10-22): taller and narrower than the 16:9 deck pages (8.5 x 7.5 in), larger marks and y-axis text.
+# Layout: taller and narrower than the 16:9 deck pages (8.5 x 7.5 in), larger marks and y-axis text.
 PANEL <- c(A = "A. Per task,\nhand-checked\n(biased by early exit)", A2 = "B. Per attempt,\nhand-checked\n(fair)", B = "C. Per attempt,\nraw detector\n(fair)")
 tab$panel <- factor(PANEL[tab$view], levels = PANEL)
-# Wording (user, 2026-10-22): "verbalized evaluation awareness"; labels say what GLM wrote, not what it believed.
+# Wording: "verbalized evaluation awareness"; labels say what GLM wrote, not what it believed.
 YLAB <- c("No remark" = "No such\nremark", "Planted trap only" = "Says the\nconflict was\nplanted", "Explicitly a test" = "Says it's\nbeing tested", "Test or trap (detector)" = "Any awareness\nremark\n(detector)")
 tab$key <- ifelse(tab$status == "No remark yet", "No remark", ifelse(tab$status == "Suspicion voiced", "Test or trap (detector)", tab$status))
 tab$label <- factor(YLAB[tab$key], levels = rev(YLAB))

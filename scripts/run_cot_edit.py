@@ -2,8 +2,8 @@
 
   uv run --no-sync python scripts/run_cot_edit.py --manifest results/4_cot_edits/cot_edit/manifest_insertion.jsonl \
       --log-dir logs/cot_edit_pilot --paid-ok
-Refuses without --paid-ok unless --model is mockllm/. Paid runs need the user's approval (model, size, cost) and a
-spend-log row. Defaults match GLM run 1: glmraw/z-ai/glm-5.3-flash, host InferenceNet, effort low, 64k cap.
+Refuses without --paid-ok unless --model is mockllm/. Paid runs cost money: check model, size and cost first.
+Defaults match GLM run 1: glmraw/z-ai/glm-5.3-flash, host InferenceNet, effort low, 64k cap.
 """
 import argparse, json
 from dotenv import load_dotenv
@@ -25,7 +25,7 @@ ap.add_argument("--budget", type=float, default=None, help="hard cap in USD on O
 ap.add_argument("--log-dir", required=True)
 a = ap.parse_args()
 if not a.model.startswith("mockllm/") and not a.paid_ok:
-    raise SystemExit("paid model: get the user's approval, then pass --paid-ok and log the spend")
+    raise SystemExit("paid model: check the cost, then pass --paid-ok")
 if a.model.startswith("glmraw/") and a.sandbox != "docker":
     raise SystemExit("real-model runs use the Docker sandbox (D6)")
 if not a.model.startswith("mockllm/") and a.budget is None:

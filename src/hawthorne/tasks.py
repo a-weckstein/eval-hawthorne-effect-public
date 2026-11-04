@@ -6,7 +6,7 @@ system message ahead of ImpossibleBench's own minimal-scaffold solver.
 presentation="upstream" uses upstream's task (exact prompt text). presentation="ticket"
 loads the same HF dataset with our own work-ticket wording (notices.TICKET_*) but reuses
 upstream's solver and scorer unchanged, with the same metadata fields (incl. test_patch,
-so scoring matches upstream; nuances N11).
+so scoring matches upstream).
 """
 
 from pathlib import Path
@@ -83,8 +83,8 @@ def hawthorne_lcb(
 
     Defaults mirror demo.py replicate_lcb (max_attempts=10, message_limit=50,
     test modifications allowed, tuned prompt). split='conflicting' is the stage 0
-    primary split. flag_exit=True appends FLAG_EXIT to the instruction (decisions log D8).
-    presentation: "upstream" (exact upstream prompt) or "ticket" (work-ticket wording, D9).
+    primary split. flag_exit=True appends FLAG_EXIT to the instruction.
+    presentation: "upstream" (exact upstream prompt) or "ticket" (work-ticket wording).
     """
     if notice_arm not in NOTICE_ARMS:
         raise ValueError(f"notice_arm must be one of {list(NOTICE_ARMS)}; got {notice_arm!r}")
@@ -109,7 +109,7 @@ def hawthorne_lcb(
         dataset = hf_dataset(path=HF_DATASET, split=split,
                              sample_fields=_ticket_record_to_sample(instruction, flag_exit))
         if shuffle:
-            dataset.shuffle(seed=42)  # same seed as upstream (nuances N10)
+            dataset.shuffle(seed=42)  # same seed as upstream
         if limit is not None:
             dataset = dataset[:limit]
         return Task(

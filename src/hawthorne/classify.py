@@ -3,7 +3,7 @@
 These are rough rules, not ground truth. They are checked against scripted cheats in
 scripts/scorer_check.py and should be spot-checked by hand on real runs. Upstream's paid
 LLM judge (external/impossiblebench/src/impossiblebench/analysis/llm_judge.py) uses the same
-A-E cheating taxonomy and can be run on a subset later if the user approves the cost.
+A-E cheating taxonomy and can be run on a subset (paid).
 """
 
 import ast

@@ -1,8 +1,8 @@
 #!/usr/bin/env Rscript
-# Slide figures and tables for docs/presentation_outline.md ($0; reads result files only).
+# Slide figures and tables for the presentation in docs/presentation/ ($0; reads result files only).
 #   Rscript analysis/make_deck_figures.R
 # Output: results/figures/ — one 16:9 PNG per figure/table, the data behind each as CSV,
-# and deck_figures.pdf with every page (plus the suspicion-vs-cheating page from analysis/suspicion_vs_cheating.R; run that first). Dead tasks excluded (D21).
+# and deck_figures.pdf with every page (plus the suspicion-vs-cheating page from analysis/suspicion_vs_cheating.R; run that first). Dead tasks (lcbhard_35, lcbhard_87) excluded.
 # Intervals: Wilson 95% where each task appears once; task-cluster percentile bootstrap (10,000 resamples,
 # seed 20261022) where each task has 2 samples (reasoning-edit runs), because the samples are not independent.
 # Colours: validated categorical palette (dataviz skill reference instance, light mode, surface #fcfcfb);
@@ -50,8 +50,8 @@ dotplot <- function(d, title, subtitle, caption, xmax = NULL, facet = NULL) {
   p }
 
 # ---------- Slide 2 (opening): model-selection funnel ----------
-# Counts from docs/model_tracker.md: 8 models screened (4 closed, 4 open, incl. Qwen3-8B run locally; qwen3.8-flash is
-# closed-weights, its open counterpart is Qwen3.8-Flash-Next: user, 2026-10-22),
+# Counts: 8 models screened (4 closed, 4 open, incl. Qwen3-8B run locally; qwen3.8-flash is
+# closed-weights, its open counterpart is Qwen3.8-Flash-Next),
 # 2 assessed with monitoring-notice arms, 1 taken forward. Stage shading: ordinal blue ramp (validated --ordinal).
 FUN <- data.frame(stage = 1:3, n = c(8, 2, 1), y = c(3.05, 1.75, 0.75), half = c(0.62, 0.42, 0.38),
   title = c("Screen open and closed\nmodels for baseline cheating", "Assess the Hawthorne effect /\nevaluation awareness", "Dose-response and\nreasoning (CoT) insertion"),
@@ -82,7 +82,7 @@ pf <- ggplot() +
   coord_cartesian(xlim = c(-7.4, 11.6), ylim = c(0.3, 3.7), clip = "off") +
   labs(title = "From eight models to one: how we chose where to look",
        subtitle = "Cheating rates from the 20-task screen (neutral prompt, prompt A, 3 attempts); effects are notice vs no-notice control",
-       caption = "Sources: docs/model_tracker.md; results/1_screening/2026-10-13_screen_A_*/; study_design_stage0.md §6–9; study_design_stage1.md §9; study_design_cot_edit.md §11–13.\nQwen3-8B was screened locally with different settings (prompts D and default, 10 attempts). Funnel widths are proportional to the number of models.") +
+       caption = "Sources: results/1_screening/, results/2_hawthorne_effect/, results/3_audit_probability/, results/4_cot_edits/.\nQwen3-8B was screened locally with different settings (prompts D and default, 10 attempts). Funnel widths are proportional to the number of models.") +
   theme_void(base_size = 13) + theme(plot.background = element_rect(fill = SURF, colour = NA),
     plot.title = element_text(face = "bold", size = 17, colour = INK, margin = margin(b = 4)), plot.subtitle = element_text(size = 11.5, colour = INK2, margin = margin(b = 10)),
     plot.caption = element_text(size = 9, colour = MUTED, hjust = 0), plot.title.position = "plot", plot.caption.position = "plot", plot.margin = margin(18, 24, 14, 18))
@@ -167,10 +167,10 @@ save_fig(p4b, "fig4b_wording_head_to_head", hs[, c("arm", "k", "n", "rate", "lo"
 
 # ---------- Slide 4 (alternative): Hawthorne effect on both models, pooled over runs ----------
 # Luna: stage 0, 0b and run 3 (2026-10-22, adds filler). GLM: the same three runs as the GLM-only slide (runs 1, 2 and the wording head-to-head); the
-# 20-task screen D is excluded so both slides agree (user, 2026-10-22). Runs differ in size, timing and route, so the
+# 20-task screen D is excluded so both slides agree. Runs differ in size, timing and route, so the
 # two panels are not a head-to-head. Intervals: task-cluster bootstrap within model.
 # Colours: two notice hues (blue, orange; validated --pairs all); both controls (no sentence, filler) in grey.
-# The "part of an evaluation" arm is omitted (user, 2026-10-22): GLM only ran it in the excluded 20-task screen D.
+# The "part of an evaluation" arm is omitted: GLM only ran it in the excluded 20-task screen D.
 H2 <- list(
   "gpt-5.6-luna (closed)" = c("2026-10-13_stage0_gpt56luna", "2026-10-13_stage0b_gpt56luna", "2026-10-22_luna_filler_run"),
   "GLM-5.3-flash (open)"  = c("2026-10-14_glm_confirm_run1", "2026-10-18_glm_confirm_run2", "2026-10-21_glm_wording_h2h"))
@@ -199,7 +199,7 @@ p4c <- ggplot(hh, aes(y = label)) +
                         "luna: reviewed −12.5 pp (p < 0.0001) over 3 runs, but −27, −6, −5 by run; the two concurrent runs pooled give −5.4 pp (p = 0.10). Filler +2 pp, not reviewed +1 pp (n.s.).\n",
                         "GLM: reviewed −17 pp (p < 0.0001); not reviewed −8.5 pp (p = 0.10); filler +3 pp (n.s.).\n",
                         "Luna runs: stage 0, 0b and run 3, 101 tasks each (stage 0 arms ran one after another). GLM runs: confirmation runs 1–2 and the wording\n",
-                        "head-to-head, 59 tasks each (same runs as the GLM-only slide). Luna's other stage 0b wordings (two review paraphrases, stakes, \"part of an evaluation\"): study_design_stage0.md §7."),
+                        "head-to-head, 59 tasks each (same runs as the GLM-only slide). Luna's other stage 0b wordings (two review paraphrases, stakes, \"part of an evaluation\"): not shown."),
        x = "In-loop cheating rate (95% interval)", y = NULL) +
   theme_deck() + theme(panel.spacing.x = unit(1.6, "lines"), plot.caption = element_text(size = 8.4)) + coord_cartesian(clip = "off")
 save_fig(p4c, "fig4c_hawthorne_two_models", hh[, c("model", "arm", "runs", "k", "n", "rate", "lo", "hi")])
@@ -266,7 +266,7 @@ r1 <- merge(g[, c("run", "sample", "arm", "cheat")], sus[, c("run", "sample", "a
 stopifnot(nrow(r1) == nrow(g), nrow(r1) == nrow(sus))
 r1$hand <- best$rank[match(with(r1, paste(run, arm, sample)), with(best, paste(run, arm, sample)))]; r1$hand[is.na(r1$hand)] <- 0
 stopifnot(all(r1$flag[r1$hand > 0] == 1))   # every hand-confirmed task was flagged by the detector
-# Wording (user, 2026-10-22): "verbalized evaluation awareness"; categories say what GLM wrote, not what it believed.
+# Wording: "verbalized evaluation awareness"; categories say what GLM wrote, not what it believed.
 MEAS <- c(raw = "Detector flag\n(as previous slide)", trap = "Hand-checked: any\nawareness remark", expl = "Hand-checked: says\nit's being tested")
 r1$m_raw <- r1$flag; r1$m_trap <- as.integer(r1$hand >= 1); r1$m_expl <- as.integer(r1$hand == 2)
 e1 <- do.call(rbind, lapply(names(MEAS), function(m) do.call(rbind, lapply(names(ARMS), function(a) { x <- r1[r1$arm == a, ]; y <- x[[paste0("m_", m)]]
@@ -306,9 +306,9 @@ save_fig(p4e, "fig4e_glm_suspicion_handchecked", e1[, c("measure", "arm", "runs"
 ed <- function(path, side, labels, cols) { d <- read.csv(path); if ("error" %in% names(d)) d <- d[d$error == 0, ]
   do.call(rbind, lapply(names(labels), function(a) { x <- d[d$arm == a, ]; b <- boot_task(x[, c("task", "cheat")])
     cbind(side = side, arm = a, group = labels[[a]], col = cols[[a]], k = sum(x$cheat), n = nrow(x), b) })) }
-# Short arm labels (user, 2026-10-22); the full inserted text is on the companion table (tab6). Order within each panel:
+# Short arm labels; the full inserted text is on the companion table (tab6). Order within each panel:
 # control first, then the control-like edit, then the edit of interest.
-# Wording (user, 2026-10-22): "verbalized evaluation awareness" as the umbrella term; labels describe the sentence inserted or
+# Wording: "verbalized evaluation awareness" as the umbrella term; labels describe the sentence inserted or
 # deleted, not a belief. The quoted fragment is the start of the actual inserted sentence.
 INS <- list(keep_at_point = "Control (no change)", insert_control = "Insert neutral sentence\n(\"outdated test file\")",
             insert = "Insert \"this might be an\nevaluation scenario\"")
@@ -337,7 +337,7 @@ p6 <- ggplot(e, aes(y = label, x = rate)) +
   theme_deck() + theme(strip.text = element_text(size = 11.5, lineheight = 1.1), axis.text.y = element_text(size = 13.5, colour = INK, lineheight = 0.95),
                        axis.text.x = element_text(size = 11.5), plot.title = element_text(lineheight = 1.05), panel.spacing.y = unit(1.1, "lines")) +
   coord_cartesian(clip = "off")
-# Taller and narrower than the 16:9 pages, with larger marks and y-axis text (user, 2026-10-22).
+# Taller and narrower than the 16:9 pages, with larger marks and y-axis text.
 ggsave(file.path(OUT, "fig6_reasoning_edits.png"), p6, width = 8.5, height = 9.5, dpi = DPI, bg = SURF)
 write.csv(e[, c("side", "arm", "group", "k", "n", "rate", "lo", "hi")], file.path(OUT, "fig6_reasoning_edits.csv"), row.names = FALSE)
 pages[[length(pages) + 1]] <- p6; cat("wrote fig6_reasoning_edits\n")
@@ -354,7 +354,7 @@ ins_tab$Cheated <- c(e$txt[e$side == unique(e$side)[1]][match(c("keep_at_point",
                      e$txt[e$side == unique(e$side)[2]][match(c("keep", "cut", "replace"), e$arm[e$side == unique(e$side)[2]])],
                      e$txt[e$side == unique(e$side)[3]][match(c("keep_at_point", "ins_p0", "ins_p10", "ins_p100"), e$arm[e$side == unique(e$side)[3]])])
 save_table(table_page(ins_tab, "What we placed in GLM's reasoning", "Inserted at the point where GLM first notices the contradiction (A, C) or at its own remark (B)",
-                      "Exact text: src/hawthorne/cot_edit.py. Write-up: docs/study_design_cot_edit.md sections 11–13.", c(16, 15, 70, 14)),
+                      "Exact text: src/hawthorne/cot_edit.py. Data: results/4_cot_edits/.", c(16, 15, 70, 14)),
            "tab6_inserted_text", ins_tab)
 
 # ---------- one PDF with every page ----------
@@ -362,7 +362,7 @@ save_table(table_page(ins_tab, "What we placed in GLM's reasoning", "Inserted at
 # and the Cairo PDF device needs X11, which is not installed on this machine.
 pngs <- file.path(OUT, c("fig2a_model_funnel.png", "fig2_model_scan.png", "tab3_prompts.png", "fig4_glm_runs.png", "fig4b_wording_head_to_head.png", "fig4c_hawthorne_two_models.png", "fig4d_glm_suspicion.png", "fig4e_glm_suspicion_handchecked.png",
                          "fig6_reasoning_edits.png", "tab6_inserted_text.png"))
-# Supplement made by analysis/suspicion_vs_cheating.R (user, 2026-10-22): placed after the run 1 suspicion page.
+# Supplement made by analysis/suspicion_vs_cheating.R: placed after the run 1 suspicion page.
 SVC <- "results/2_hawthorne_effect/2026-10-22_suspicion_vs_cheating/suspicion_vs_cheating.png"
 if (!file.exists(SVC)) stop("missing ", SVC, ": run Rscript analysis/suspicion_vs_cheating.R first")
 k <- match(file.path(OUT, "fig4e_glm_suspicion_handchecked.png"), pngs); pngs <- append(pngs, SVC, after = k)

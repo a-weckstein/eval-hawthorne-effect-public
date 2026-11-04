@@ -12,7 +12,7 @@ dependencies = [
 ]
 
 [tool.uv.sources]
-# Pinned, unmodified upstream code lives in the git submodule (see _reference/decisions_log.md, D1).
+# Pinned, unmodified upstream code lives in the git submodule external/impossiblebench.
 impossiblebench = { path = "external/impossiblebench", editable = true }
 
 [build-system]

@@ -100,7 +100,7 @@ for (na, sid), r in sorted(pts.items()):
 note = (f"**Note on the removal design:** only the one remark at the edit point is deleted; earlier reasoning is kept. "
         f"In {kept_aware} of {len(pts)} removal tasks, the detector finds an awareness remark in that kept text, "
         "so a remark after deletion is not always a fresh re-derivation. The kept text is identical in all three removal arms "
-        "(control included), so the arm comparison is unaffected; already recorded in `docs/study_design_cot_edit.md` (removal checks). "
+        "(control included), so the arm comparison is unaffected. "
         "The removal example above was drawn from the other tasks, so its kept text has no detector-flagged remark.")
 print(note)
 md += [note, ""]

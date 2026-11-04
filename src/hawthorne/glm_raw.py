@@ -1,6 +1,6 @@
 """Inspect model connector "glmraw": GLM-5.3 via OpenRouter's raw /completions endpoint, with reasoning continuation.
 
-Why (nuances N22, design `docs/study_design_cot_edit.md`): OpenRouter's chat endpoint cannot continue a partial
+Why: OpenRouter's chat endpoint cannot continue a partial
 reasoning trace for GLM-5.3-flash. The raw endpoint can, if we write GLM's chat template ourselves and stop inside an
 open <think> block. This connector renders every call that way, so all arms of the reasoning-edit experiment share
 one endpoint.

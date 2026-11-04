@@ -2,8 +2,7 @@
 
     uv run --no-sync python scripts/cot_edit_example_quotes.py
 
-User request (2026-10-22): an example where GLM treats the inserted review sentence as outside text (reported in
-study_design_cot_edit.md §13, point 4). The two probability-sweep episodes behind those quotes, found via the blind
+An example where GLM treats the inserted review sentence as outside text. The two probability-sweep episodes behind those quotes, found via the blind
 labelling sheet (labels_blind.csv / labels_key.csv). Output: results/4_cot_edits/2026-10-22_cot_edit_examples/probability_outside_text_examples.md
 """
 import csv, json, sys
@@ -34,7 +33,7 @@ samples = list(csv.DictReader(open("results/4_cot_edits/2026-10-21_cot_edit_prob
 md = ["# GLM treating the inserted review sentence as outside text (probability sweep, examples)", "",
       "From the in-reasoning probability sweep (experiment C). The sentence was inserted into GLM's first-attempt reasoning, "
       "right after it first named the contradiction, and GLM continued from there. Text is GLM's private reasoning, verbatim; "
-      "… marks cuts. Selection: episodes quoted in `docs/study_design_cot_edit.md` §13 (point 4), not a random draw.", ""]
+      "… marks cuts. Selection: hand-picked illustrative episodes, not a random draw.", ""]
 for na, sid, arm, rep, quote in EPISODES:
     row = next(r for r in map(json.loads, open("results/4_cot_edits/cot_edit/manifest_probability.jsonl"))
                if r["notice_arm"] == na and r["sample"] == sid and r["arm"] == arm and int(r["rep"]) == rep)

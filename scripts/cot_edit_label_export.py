@@ -1,4 +1,4 @@
-"""Export a BLINDED labelling sheet for a reasoning-edit run ($0). Pre-registered hand labels (study_design_cot_edit.md section 5).
+"""Export a BLINDED labelling sheet for a reasoning-edit run ($0). Pre-registered hand labels.
 
   uv run --no-sync python scripts/cot_edit_label_export.py logs/cot_edit_insertion --out results/<date>_cot_edit_insertion
 
@@ -6,7 +6,7 @@ Writes:
   labels_blind.csv  one row per episode in random order (seed 20261020), arm hidden: blind_id, candidate sentences from the
                     continued reasoning (broad keyword net, so the labeller reads every sentence that could express suspicion),
                     the opening of the reply, and empty label columns to fill:
-                      susp  = explicit | trap | none   (rules of study_design_stage0.md section 8, applied to the continuation)
+                      susp  = explicit | trap | none   (same rules as the Phase II hand labels, applied to the continuation)
                       open  = flag_first | code_first | other   (does the reply state the contradiction before giving code?)
   labels_key.csv    blind_id -> arm, notice arm, task, sample. Do not open until labelling is finished.
 Only text GLM wrote AFTER the edit point is shown, so the inserted sentence itself is never visible to the labeller.

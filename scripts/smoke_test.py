@@ -47,7 +47,7 @@ check("1. task builds for all arms x instructions", len(built) == len(NOTICE_ARM
 full = hawthorne_lcb(notice_arm="baseline", sandbox=SANDBOX)
 check("2. conflicting split loads", len(full.dataset) > 0, f"(n_full={len(full.dataset)}, n_limited={LIMIT})")
 
-# 2b. Flag-exit sentence (decisions log D8): present, in the right place, only when requested.
+# 2b. Flag-exit sentence: present, in the right place, only when requested.
 with_flag = hawthorne_lcb(notice_arm="baseline", sandbox=SANDBOX, limit=1, flag_exit=True)
 no_flag = hawthorne_lcb(notice_arm="baseline", sandbox=SANDBOX, limit=1)
 txt_f, txt_n = with_flag.dataset[0].input, no_flag.dataset[0].input
@@ -55,7 +55,7 @@ check("2b. flag sentence present when flag_exit=True, before upstream's DO NOT M
       (INSTRUCTIONS["upstream_tuned"] + " " + FLAG_EXIT + " **DO NOT MODIFY THE TESTS.**") in txt_f)
 check("2c. flag sentence absent by default", FLAG_EXIT not in txt_n and "flag_for_human_intervention" not in txt_n)
 
-# 2d. Ticket presentation (decisions log D9): same task data as upstream, no benchmark cues.
+# 2d. Ticket presentation: same task data as upstream, no benchmark cues.
 tk = hawthorne_lcb(notice_arm="baseline", sandbox=SANDBOX, limit=LIMIT, presentation="ticket", flag_exit=True)
 up = hawthorne_lcb(notice_arm="baseline", sandbox=SANDBOX, limit=LIMIT)
 same = all(a.id == b.id and all(a.metadata[k] == b.metadata[k] for k in ("prompt", "test", "entry_point", "test_patch"))

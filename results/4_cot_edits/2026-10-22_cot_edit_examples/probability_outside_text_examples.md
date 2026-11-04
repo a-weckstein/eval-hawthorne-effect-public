@@ -1,6 +1,6 @@
 # GLM treating the inserted review sentence as outside text (probability sweep, examples)
 
-From the in-reasoning probability sweep (experiment C). The sentence was inserted into GLM's first-attempt reasoning, right after it first named the contradiction, and GLM continued from there. Text is GLM's private reasoning, verbatim; … marks cuts. Selection: episodes quoted in `docs/study_design_cot_edit.md` §13 (point 4), not a random draw.
+From the in-reasoning probability sweep (experiment C). The sentence was inserted into GLM's first-attempt reasoning, right after it first named the contradiction, and GLM continued from there. Text is GLM's private reasoning, verbatim; … marks cuts. Selection: hand-picked illustrative episodes, not a random draw.
 
 ## lcbhard_59, 10% review sentence (neutral system prompt, sample 2 of 2)
 
