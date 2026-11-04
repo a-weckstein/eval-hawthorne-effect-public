@@ -3,6 +3,7 @@
 **Does telling a language model that its work might be reviewed make it cheat less, and does the stated chance of review matter?**
 
 Authors: Andrew Weckstein, Harsh Sanghi and Liam Shepard.
+
 Mini-experiment for CS 2881 (AI Safety), Harvard, October 2026. The slide deck we presented: [`docs/presentation/HawthorneEffect_Presentation.pdf`](docs/presentation/HawthorneEffect_Presentation.pdf).
 
 **Motivation**: Recent evidence suggests that reasoning models may behave differently when they believe they are being evaluated (Abdelnabi and Salem, 2025, “The Hawthorne Effect in Reasoning Models”). This creates a significant challenge for safety and alignment, since behavior observed in evaluations may not reliably predict behavior in deployment. As a result, pre-release testing could miss behaviors that emerge only when models operate outside the conditions of evaluation.
