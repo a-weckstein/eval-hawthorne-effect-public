@@ -17,7 +17,7 @@ same config on the remaining tasks without re-running the canary is `--limit 20:
 both log dirs together: `summarize_logs.py logs/a_canary logs/a_rest`.
 
 --max-tasks N runs N arms concurrently (sharing --max-connections), so time or routing drift cannot
-line up with arm (M5). --provider pins the OpenRouter upstream provider with fallbacks off; the
+line up with arm. --provider pins the OpenRouter upstream provider with fallbacks off; the
 provider that actually served each call is recorded in the log and reported by summarize_logs.py.
 
 --temperature is passed to the provider only when given; by default the provider's own default
@@ -30,7 +30,7 @@ from dotenv import load_dotenv
 from inspect_ai import eval as inspect_eval
 
 from hawthorne import INSTRUCTIONS, NOTICE_ARMS, hawthorne_lcb
-import hawthorne.glm_raw  # noqa: F401  (registers glmraw/: raw-template OpenRouter route with a hard run budget, D29/D32)
+import hawthorne.glm_raw  # noqa: F401  (registers glmraw/: raw-template OpenRouter route with a hard run budget)
 
 FREE_PREFIXES = ("ollama/", "mockllm/", "vllm/")
 
@@ -51,19 +51,19 @@ ap = argparse.ArgumentParser()
 ap.add_argument("--model", required=True)
 ap.add_argument("--arms", nargs="+", default=["baseline"], choices=list(NOTICE_ARMS))
 ap.add_argument("--instructions", nargs="+", default=["upstream_tuned"], choices=list(INSTRUCTIONS))
-ap.add_argument("--flag-exit", action="store_true", help="append FLAG_EXIT to the instruction (D8)")
-ap.add_argument("--presentation", choices=["upstream", "ticket"], default="upstream", help="task wording (D9)")
+ap.add_argument("--flag-exit", action="store_true", help="append FLAG_EXIT to the instruction")
+ap.add_argument("--presentation", choices=["upstream", "ticket"], default="upstream", help="task wording")
 ap.add_argument("--split", default="conflicting")
 ap.add_argument("--limit", type=parse_limit, default=5, help="count N, or range START:STOP (0-based, STOP exclusive)")
 ap.add_argument("--temperature", type=float, default=None, help="sampling temperature; omit for the provider default")
 ap.add_argument("--max-attempts", type=int, default=10)
 ap.add_argument("--max-connections", type=int, default=1)
-ap.add_argument("--max-tasks", type=int, default=1, help="arms run concurrently (M5); default 1 = one after another")
-ap.add_argument("--provider", default=None, help="OpenRouter upstream provider to pin, fallbacks off (M5), e.g. OpenAI, DeepSeek")
+ap.add_argument("--max-tasks", type=int, default=1, help="arms run concurrently; default 1 = one after another")
+ap.add_argument("--provider", default=None, help="OpenRouter upstream provider to pin, fallbacks off, e.g. OpenAI, DeepSeek")
 ap.add_argument("--max-tokens", type=int, default=16000, help="cap per reply")
 ap.add_argument("--reasoning-effort", default="medium", choices=["none", "minimal", "low", "medium", "high"])
 ap.add_argument("--reasoning-tokens", type=int, default=4096)
-ap.add_argument("--paid-ok", action="store_true", help="required for any non-local model; user approval first")
+ap.add_argument("--paid-ok", action="store_true", help="required for any non-local model; check the cost first")
 ap.add_argument("--budget", type=float, default=None, help="glmraw/ models only: hard cap in USD on OpenRouter-reported spend (required for glmraw)")
 ap.add_argument("--log-dir", required=True)
 args = ap.parse_args()

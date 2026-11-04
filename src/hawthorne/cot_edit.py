@@ -31,7 +31,7 @@ from .classify import EVAL_AWARENESS
 from .glm_raw import _reasoning
 from .tasks import _resolve_sandbox
 
-DEAD_TASKS = {"lcbhard_35", "lcbhard_87"}  # D21
+DEAD_TASKS = {"lcbhard_35", "lcbhard_87"}  # can never pass; excluded from rates
 MAX_ATTEMPTS_TOTAL = 3                     # run-1 setting
 ARM_FILE_KEY = {"all_reviewed": "all-reviewed", "not_reviewed_only": "not-reviewed-only", "neutral": "neutral", "filler": "filler"}
 
@@ -85,7 +85,7 @@ def sentence_end(text: str, pos: int) -> int:
 
 @functools.lru_cache(maxsize=None)
 def run1_samples(log_dir: str, notice_arm: str) -> dict:
-    """Run-1 samples for one notice arm, read once per process and cached (D29: repeated reads in one long QA
+    """Run-1 samples for one notice arm, read once per process and cached (repeated reads in one long QA
     process stalled inside Inspect's log reader; callers must not mutate the returned samples)."""
     f = [p for p in Path(log_dir).glob("*.eval") if f"-{ARM_FILE_KEY[notice_arm]}-" in p.name]
     if len(f) != 1:
@@ -147,7 +147,7 @@ def insertion_points(labels_csv: str, log_dir: str, per_arm: int = 12, seed: int
 
 
 def _separator(original: str, k: int) -> str:
-    """The whitespace GLM itself wrote at position k (space or newline); a space if none (D28)."""
+    """The whitespace GLM itself wrote at position k (space or newline); a space if none."""
     nxt = original[k:k + 1]
     return nxt if nxt in (" ", "\n") else " "
 
@@ -155,7 +155,7 @@ def _separator(original: str, k: int) -> str:
 def edited_reasoning(original: str, point: dict, arm: str) -> tuple[str, str]:
     """Return (reasoning handed to the model, added_text) for one arm.
 
-    Formatting rules (D28): no prompt ends in a space (models attach a space to the NEXT word, so a trailing space
+    Formatting rules: no prompt ends in a space (models attach a space to the NEXT word, so a trailing space
     is an unnatural place to stop); inserted sentences are joined with the separator GLM itself used at that point.
     """
     head = original[: point["cut_char"]]
@@ -188,7 +188,7 @@ FRESH_ARMS = {"prompt_eval"}  # episodes run from the start with an edited syste
 
 def probability_points(labels_csv: str, run1_dir: str, run2_snippets_csv: str, run2_dir: str,
                        per_arm: int = 20, seed: int = 20261021) -> list[dict]:
-    """Probability sweep (D32): neutral and filler system prompts only (no notice for the inserted probability to
+    """Probability sweep: neutral and filler system prompts only (no notice for the inserted probability to
     contradict). One base episode per (notice arm, task): run 1 if eligible, else run 2. Eligible = no explicit or
     trap remark (run 1: hand labels; run 2: no detector hit at all, conservative) and a reply-1 reasoning sentence
     naming the contradiction. Seeded draw of per_arm tasks per notice arm. Each row records its source log dir."""

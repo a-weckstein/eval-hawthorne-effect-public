@@ -1,8 +1,8 @@
 #!/usr/bin/env Rscript
 # Does GLM-5.3-flash cheat less when it voices suspicion that the task is a test? ($0; reads result files only.)
 #   Rscript analysis/suspicion_vs_cheating.R
-# Output: results/2_hawthorne_effect/2026-10-22_suspicion_vs_cheating/ (tables CSV, results txt, figure PNG). Dead tasks excluded (D21).
-# Two views (user question, 2026-10-22):
+# Output: results/2_hawthorne_effect/2026-10-22_suspicion_vs_cheating/ (tables CSV, results txt, figure PNG). Dead tasks excluded.
+# Two views:
 #  A. Per task (runs 1-3, hand labels): strongest unprompted remark over the task vs cheated in the loop. CONFOUNDED: a cheat
 #     ends the loop early, so cheating tasks have fewer attempts in which to make a remark.
 #  A2. Per attempt, same data as A (hand labels), each attempt reached counts once.
@@ -110,7 +110,7 @@ p <- ggplot(tab, aes(y = label, x = rate)) +
                         ",\ntested ", orp(cA2, "statusExplicitly a test"), ".  C: any remark ", orp(cB, "susp"), ".\n",
                         "A looks like a strong link, but cheating stops the loop, so cheating tasks get fewer chances to\nvoice evaluation awareness. B and C give each attempt one chance. ",
                         "Axes differ: A counts tasks, B and C count attempts.\nEach remark comes before that attempt's code. Task-cluster bootstrap 95% intervals.\n",
-                        "Hand labels (D22): run 1 by one reader; runs 2–3 by Claude, blind to prompt version and outcome.\nDetector counts include false alarms. ",
+                        "Hand labels: run 1 by one reader; runs 2–3 by Claude, blind to prompt version and outcome.\nDetector counts include false alarms. ",
                         "Correlational only; the causal test is the reasoning-edit experiment.\nCode: analysis/suspicion_vs_cheating.R."),
        x = "Cheating rate (95% interval)", y = NULL) +
   theme_minimal(base_size = 13) + theme(

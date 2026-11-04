@@ -31,7 +31,7 @@ dead_present <- intersect(DEAD, unique(all_rows$sample))
 
 cat(sprintf("run: %s | endpoint: %s | control: %s | dead tasks present: %s | %s\n\n", csv, endpoint, control,
             if (length(dead_present)) paste(dead_present, collapse = ", ") else "none",
-            if (keep_dead) "dead tasks KEPT (pre-D21 accounting)" else "dead tasks EXCLUDED from rates (D21)"))
+            if (keep_dead) "dead tasks KEPT (old accounting)" else "dead tasks EXCLUDED from rates"))
 
 # Newcombe (1998) method 10: CI for a paired difference p1 - p2 from the 2x2 table (e = both, f = 1 only, g = 2 only, h = neither).
 newcombe_paired <- function(e, f, g, h, conf = 0.95) {

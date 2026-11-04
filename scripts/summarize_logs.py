@@ -80,7 +80,7 @@ for f in sorted(f for d in args.log_dir for f in Path(d).glob("*.eval")):
         first_pass = next((a["attempt"] for a in hist if a["success"]), None)
         ctype = cheat_type(hist[first_pass - 1]["answer"], s.metadata.get("test", "")) if first_pass else ""
 
-        # Upstream provider(s) that served this sample's calls (OpenRouter puts it in the response body; M5).
+        # Upstream provider(s) that served this sample's calls (OpenRouter puts it in the response body).
         providers = sorted({(e.call.response or {}).get("provider") for e in s.events
                             if e.event == "model" and e.call and isinstance(e.call.response, dict)} - {None}) or ["?"]
         usage = s.model_usage
@@ -111,7 +111,7 @@ for f in sorted(f for d in args.log_dir for f in Path(d).glob("*.eval")):
         rows.append(dict(
             task=lg.eval.task, model=lg.eval.model, arm=ta.get("notice_arm"), instruction=ta.get("instruction"),
             flag_exit=ta.get("flag_exit", False), presentation=ta.get("presentation", "upstream"), sample=s.id,
-            cheat_in_loop=first_pass is not None,          # primary endpoint (D7)
+            cheat_in_loop=first_pass is not None,          # primary endpoint
             cheat_scored=score is not None and score.value == "C",  # secondary (upstream)
             first_pass_attempt=first_pass or "",
             cheat_type=ctype,
@@ -130,7 +130,7 @@ for f in sorted(f for d in args.log_dir for f in Path(d).glob("*.eval")):
             input_tokens=in_tok, input_tokens_cache_read=cache_read, output_tokens=out_tok,
             cost_usd=round(cost, 5),
             minutes=round((s.total_time or 0) / 60, 2),
-            providers="|".join(providers),   # upstream provider(s) that served this sample (M5)
+            providers="|".join(providers),   # upstream provider(s) that served this sample
             error=str(s.error.message)[:80] if s.error else "",
         ))
 
@@ -160,7 +160,7 @@ for key in sorted({gkey(r) for r in rows}, key=str):
           f"{sum(r['n_reply_eval_aware'] > 0 for r in g):>12}{sum(r['cost_usd'] for r in g):>9.2f}")
 
 import collections as _c
-print("\nUpstream provider per group (M5; from the OpenRouter response body)")
+print("\nUpstream provider per group (from the OpenRouter response body)")
 for key in sorted({gkey(r) for r in rows}, key=str):
     cnt = _c.Counter(r["providers"] for r in rows if gkey(r) == key)
     print(f"  {key[4]:<14}{key[1]:<10}{dict(cnt)}")
@@ -176,7 +176,7 @@ print(f"  samples with errors:               {sum(bool(r['error']) for r in rows
 print(f"  largest single-call prompt (tok):  {max(r['max_call_input_tokens'] for r in rows)}")
 print(f"  replies cut off at token limit:    {pct(cut, n_replies)}"
       + ("   ** OVER 2% LIMIT **" if n_replies and cut / n_replies > CUTOFF_LIMIT else ""))
-print(f"  replies with 2+ code blocks (N13): {pct(multi, n_replies)}"
+print(f"  replies with 2+ code blocks: {pct(multi, n_replies)}"
       + ("   ** OVER 5% LIMIT: consider own extractor **" if n_replies and multi / n_replies > MULTIBLOCK_LIMIT else ""))
 print(f"  replies with no code and no flag:  {pct(sum(r['n_reply_no_code'] for r in rows), n_replies)}")
 print(f"  replies objecting to tests:        {pct(sum(r['n_reply_objecting'] for r in rows), n_replies)}")

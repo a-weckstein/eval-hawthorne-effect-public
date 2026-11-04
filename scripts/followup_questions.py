@@ -7,8 +7,8 @@ Questions: Q0 neutral warm-up, Q1 test probability, Q2 reviewed?
 Example (free, mock model):
   uv run --no-sync python scripts/followup_questions.py logs/stage0_gpt56luna --model mockllm/model \
       --limit 2 --out results/followup_test
-Paid models need --paid-ok (user approval first; log spend). Cost is mostly re-sent input tokens.
-Pass --reasoning-effort to match the original run (reasoning counts against --max-tokens, N17).
+Paid models need --paid-ok (check the cost first). Cost is mostly re-sent input tokens.
+Pass --reasoning-effort to match the original run (reasoning counts against --max-tokens).
 --limit N takes the first N task ids of each log, so every arm gets the same tasks.
 """
 
@@ -39,17 +39,17 @@ ap = argparse.ArgumentParser()
 ap.add_argument("log_dir", nargs="+", help="dirs of finished .eval logs")
 ap.add_argument("--model", required=True, help="model to answer; normally the same model that ran the task")
 ap.add_argument("--limit", type=int, default=None, help="first N samples per log (canary)")
-ap.add_argument("--max-tokens", type=int, default=2000, help="cap per answer; reasoning counts against it (N17)")
+ap.add_argument("--max-tokens", type=int, default=2000, help="cap per answer; reasoning counts against it")
 ap.add_argument("--reasoning-effort", default=None, choices=["none", "minimal", "low", "medium", "high"],
-                help="pass through to the provider; use the same value as the original run (GLM: low, N20)")
+                help="pass through to the provider; use the same value as the original run (GLM: low)")
 ap.add_argument("--max-connections", type=int, default=8)
-ap.add_argument("--provider", default=None, help="OpenRouter upstream provider pin (M5)")
+ap.add_argument("--provider", default=None, help="OpenRouter upstream provider pin")
 ap.add_argument("--paid-ok", action="store_true")
 ap.add_argument("--out", required=True, help="output dir for followup.csv and followup.jsonl")
 args = ap.parse_args()
 
 if not args.model.startswith(FREE_PREFIXES) and not args.paid_ok:
-    raise SystemExit(f"{args.model} is a paid model; get approval, then pass --paid-ok and log the spend.")
+    raise SystemExit(f"{args.model} is a paid model; check the cost, then pass --paid-ok.")
 load_dotenv()
 
 model_args = {}

@@ -32,7 +32,7 @@ RETRY_STATUS = {408, 409, 425, 429, 500, 502, 503, 504, 520, 522, 524, 529}
 
 
 class GLMRawBudgetExceeded(RuntimeError):
-    """Raised before a call once the run's OpenRouter-reported spend reaches budget_usd (D29). Never retried."""
+    """Raised before a call once the run's OpenRouter-reported spend reaches budget_usd. Never retried."""
 
 
 class GLMRawHTTPError(RuntimeError):
@@ -97,7 +97,7 @@ class GLMRawAPI(ModelAPI):
                  transport: Any = None, budget_usd: float | None = None, **model_args: Any) -> None:
         super().__init__(model_name, base_url, api_key, ["OPENROUTER_API_KEY"], config)
         self.provider = provider
-        # Hard run-level spending cap (D29): cumulative OpenRouter-reported cost of every call made by this model
+        # Hard run-level spending cap: cumulative OpenRouter-reported cost of every call made by this model
         # instance. Checked before each call, so a run overshoots by at most one call's cost.
         self.budget_usd = budget_usd
         self.spent_usd = 0.0
@@ -117,7 +117,7 @@ class GLMRawAPI(ModelAPI):
         if isinstance(ex, GLMRawHTTPError):
             return ex.status in RETRY_STATUS
         # ssl.SSLError / ConnectionError: raw TLS or socket failures that httpx does not always wrap (2 lost episodes
-        # on 2026-10-21, D30).
+        # on 2026-10-21).
         return isinstance(ex, (httpx.TimeoutException, httpx.TransportError, ValueError, ssl.SSLError, ConnectionError)) and not isinstance(ex, TypeError)
 
     async def generate(self, input: list[ChatMessage], tools: list[ToolInfo], tool_choice: ToolChoice,

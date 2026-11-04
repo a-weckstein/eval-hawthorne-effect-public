@@ -21,15 +21,15 @@ ap.add_argument("--reasoning-effort", default="low")
 ap.add_argument("--max-connections", type=int, default=8)
 ap.add_argument("--sandbox", default="docker", choices=["docker", "local"])
 ap.add_argument("--paid-ok", action="store_true")
-ap.add_argument("--budget", type=float, default=None, help="hard cap in USD on OpenRouter-reported spend for this run (required for paid runs, D29)")
+ap.add_argument("--budget", type=float, default=None, help="hard cap in USD on OpenRouter-reported spend for this run (required for paid runs)")
 ap.add_argument("--log-dir", required=True)
 a = ap.parse_args()
 if not a.model.startswith("mockllm/") and not a.paid_ok:
     raise SystemExit("paid model: check the cost, then pass --paid-ok")
 if a.model.startswith("glmraw/") and a.sandbox != "docker":
-    raise SystemExit("real-model runs use the Docker sandbox (D6)")
+    raise SystemExit("real-model runs use the Docker sandbox")
 if not a.model.startswith("mockllm/") and a.budget is None:
-    raise SystemExit("paid run: pass --budget USD (the approved ceiling); the connector stops calling once it is reached")
+    raise SystemExit("paid run: pass --budget USD (the spending ceiling); the connector stops calling once it is reached")
 import csv
 rows_ = [json.loads(l) for l in open(a.manifest) if l.strip()]
 run1_cost = {(r["arm"], r["sample"]): float(r["cost_usd"]) for r in csv.DictReader(open("results/2_hawthorne_effect/2026-10-14_glm_confirm_run1/samples.csv"))}

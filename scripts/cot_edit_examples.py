@@ -2,7 +2,7 @@
 
     uv run --no-sync python scripts/cot_edit_examples.py
 
-Selection rules, fixed before reading any text (user request, 2026-10-22): one seeded random pick (seed 20261022) from
+Selection rules, fixed before reading any text: one seeded random pick (seed 20261022) from
 the episodes that show each experiment's typical outcome, using the blind hand labels (`susp` = awareness voiced in the
 continuation):
   insertion   arm insert,   susp explicit, no cheat   (inserted evaluation sentence; GLM says it is tested; honest)
